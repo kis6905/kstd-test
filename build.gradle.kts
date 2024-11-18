@@ -1,12 +1,12 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.9.25"
-    kotlin("plugin.spring") version "1.9.25"
-    kotlin("plugin.jpa") version "1.9.25"
-    id("org.springframework.boot") version "3.3.5"
-    id("io.kotest") version "0.4.11"
-    id("io.spring.dependency-management") version "1.1.6"
+    kotlin("jvm") version Constants.Version.KOTLIN
+    kotlin("plugin.spring") version Constants.Version.KOTLIN
+    kotlin("plugin.jpa") version Constants.Version.KOTLIN
+    id("org.springframework.boot") version Constants.Version.SPRING_BOOT
+    id("io.kotest") version Constants.Version.KOTEST_PLUGIN
+    id("io.spring.dependency-management") version Constants.Version.SPRING_DEPENDENCY_MANAGEMENT
 }
 
 allprojects {
@@ -30,7 +30,7 @@ subprojects {
     dependencies {
         implementation("org.jetbrains.kotlin:kotlin-reflect")
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.9.0")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Constants.Version.COROUTINE}")
 
         implementation("org.springframework.boot:spring-boot-starter")
         implementation("org.springframework.boot:spring-boot-starter-web")
@@ -38,10 +38,10 @@ subprojects {
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
         testImplementation(kotlin("test"))
-        testImplementation("io.kotest:kotest-assertions-core-jvm:5.9.1")
-        testImplementation("io.kotest:kotest-framework-engine-jvm:5.9.1")
-        testImplementation("io.mockk:mockk:1.13.13")
-        testImplementation("com.appmattus.fixture:fixture:1.2.0")
+        testImplementation("io.kotest:kotest-assertions-core-jvm:${Constants.Version.KOTEST}")
+        testImplementation("io.kotest:kotest-framework-engine-jvm:${Constants.Version.KOTEST}")
+        testImplementation("io.mockk:mockk:${Constants.Version.MOCKK}")
+        testImplementation("com.appmattus.fixture:fixture:${Constants.Version.FIXTURE}")
     }
 
     tasks.getByName("bootJar") {

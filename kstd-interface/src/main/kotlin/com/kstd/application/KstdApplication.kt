@@ -1,4 +1,4 @@
-package com.kstd.com.kstd.application
+package com.kstd.application
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
