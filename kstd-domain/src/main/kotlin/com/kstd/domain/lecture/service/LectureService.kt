@@ -1,6 +1,7 @@
 package com.kstd.domain.lecture.service
 
 import com.kstd.common.exception.KstdException
+import com.kstd.domain.cache.port.output.CachePort
 import com.kstd.domain.lecture.dto.*
 import com.kstd.domain.lecture.policy.LecturePolicy
 import com.kstd.domain.lecture.port.input.LectureUseCase
@@ -11,7 +12,13 @@ import java.time.LocalDateTime
 @Service
 internal class LectureService(
     private val lecturePersistencePort: LecturePersistencePort,
+    private val cachePort: CachePort,
 ): LectureUseCase {
+
+    companion object {
+        private const val LOCK_KEY = "lock:lecture:application"
+    }
+
     override fun findAllLectureList(): List<LectureDto> {
         return lecturePersistencePort.findLectureList(LectureCondition())
     }
@@ -65,19 +72,29 @@ internal class LectureService(
             throw KstdException("사번이 유효하지 않습니다.")
         }
 
-        // TODO: Lock 필요
-        val applicantList = lecturePersistencePort.findApplicantsByLecture(lectureApplicantDto.lectureId)
-        val isApplied = applicantList.find { it.memberId == lectureApplicantDto.memberId } != null
-        if (isApplied) {
-            throw KstdException("이미 신청한 강의입니다.")
-        }
+        try {
+            val isAcquiredLock = cachePort.lock(LOCK_KEY)
+            if (!isAcquiredLock) {
+                throw KstdException("Lock 획득에 실패했습니다. 다시 시도해주세요.")
+            }
 
-        val lectureDto = lecturePersistencePort.findLecture(lectureApplicantDto.lectureId) ?: return
-        if (lectureDto.applicantLimit <= applicantList.size) {
-            throw KstdException("정원 초과 되었습니다.")
-        }
+            val applicantList = lecturePersistencePort.findApplicantsByLecture(lectureApplicantDto.lectureId)
+            val isApplied = applicantList.find { it.memberId == lectureApplicantDto.memberId } != null
+            if (isApplied) {
+                throw KstdException("이미 신청한 강의입니다.")
+            }
 
-        lecturePersistencePort.saveApplicant(lectureApplicantDto)
+            val lectureDto = lecturePersistencePort.findLecture(lectureApplicantDto.lectureId) ?: return
+            if (lectureDto.applicantLimit <= applicantList.size) {
+                throw KstdException("정원 초과 되었습니다.")
+            }
+
+            lecturePersistencePort.saveApplicant(lectureApplicantDto)
+        } catch (e: Exception) {
+            throw e
+        } finally {
+            cachePort.unlock(LOCK_KEY)
+        }
     }
 
     override fun cancelLecture(lectureApplicantDto: LectureApplicantDto) {

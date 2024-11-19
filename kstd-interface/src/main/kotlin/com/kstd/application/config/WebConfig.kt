@@ -3,6 +3,7 @@ package com.kstd.application.config
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import com.kstd.cache.config.CacheConfig
 import com.kstd.domain.config.KstdDomainConfig
 import com.kstd.h2.config.H2Config
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
@@ -13,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc
 
 @Configuration
 @EnableAutoConfiguration
-@Import(value = [H2Config::class, KstdDomainConfig::class])
+@Import(value = [H2Config::class, CacheConfig::class, KstdDomainConfig::class])
 @EnableWebMvc
 class WebConfig {
     @Bean

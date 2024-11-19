@@ -7,3 +7,5 @@ include("kstd-domain")
 include("kstd-infra:kstd-h2")
 findProject(":kstd-infra:kstd-h2")?.name = "kstd-h2"
 include("kstd-common")
+include("kstd-infra:kstd-cache")
+findProject(":kstd-infra:kstd-cache")?.name = "kstd-cache"
