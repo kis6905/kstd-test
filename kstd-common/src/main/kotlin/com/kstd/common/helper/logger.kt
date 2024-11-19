@@ -1,5 +1,5 @@
 package com.kstd.common.helper
 
-import mu.KotlinLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 
 val log = KotlinLogging.logger {}

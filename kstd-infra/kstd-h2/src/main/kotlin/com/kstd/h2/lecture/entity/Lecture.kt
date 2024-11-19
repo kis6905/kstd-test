@@ -14,8 +14,8 @@ class Lecture(
     @Column(name = "lecturer")
     var lecturer: String? = null,
 
-    @Column(name = "numberOfApplication")
-    var numberOfApplication: String? = null,
+    @Column(name = "applicantLimit")
+    var applicantLimit: Long? = null,
 
     @Column(name = "lectureDate")
     var lectureDate: LocalDateTime? = null,

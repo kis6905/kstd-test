@@ -4,6 +4,7 @@ plugins {
     kotlin("jvm") version Constants.Version.KOTLIN
     kotlin("plugin.spring") version Constants.Version.KOTLIN
     kotlin("plugin.jpa") version Constants.Version.KOTLIN
+    kotlin("kapt") version Constants.Version.KOTLIN
     id("org.springframework.boot") version Constants.Version.SPRING_BOOT
     id("io.kotest") version Constants.Version.KOTEST_PLUGIN
     id("io.spring.dependency-management") version Constants.Version.SPRING_DEPENDENCY_MANAGEMENT
@@ -20,8 +21,8 @@ allprojects {
 
 subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
-    apply(plugin = "org.jetbrains.kotlin.kapt")
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
+    apply(plugin = "org.jetbrains.kotlin.kapt")
     apply(plugin = "org.jetbrains.kotlin.plugin.jpa")
     apply(plugin = "org.jetbrains.kotlin.plugin.noarg")
     apply(plugin = "org.springframework.boot")
@@ -46,6 +47,10 @@ subprojects {
 
     tasks.getByName("bootJar") {
         enabled = false
+    }
+
+    tasks.getByName("jar") {
+        enabled = true
     }
 
     tasks.withType<KotlinCompile> {

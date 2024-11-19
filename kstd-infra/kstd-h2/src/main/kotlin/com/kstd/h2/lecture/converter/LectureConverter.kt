@@ -13,7 +13,7 @@ fun Lecture.toLectureDto(): LectureDto {
     return LectureDto(
         lectureId = this.lectureId!!,
         lecturer = this.lecturer!!,
-        numberOfApplication = this.numberOfApplication!!,
+        applicantLimit = this.applicantLimit!!,
         lectureDate = this.lectureDate!!,
         lectureContent = this.lectureContent!!,
         lectureHall = this.lectureHall!!,

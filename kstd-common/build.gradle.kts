@@ -1,3 +1,3 @@
 dependencies {
-    api("io.github.microutils:kotlin-logging:3.0.5")
+    api("io.github.oshai:kotlin-logging:7.0.0")
 }
