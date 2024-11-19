@@ -10,5 +10,6 @@ object Constants {
         const val FIXTURE = "1.2.0"
         const val H2 = "2.3.232"
         const val QUERY_DSL = "5.1.0"
+        const val KOTLIN_LOGGING = "7.0.0"
     }
 }

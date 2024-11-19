@@ -34,4 +34,9 @@ class LectureApiController(
     fun deleteApplicant(@RequestBody lectureApplicantDto: LectureApplicantDto) {
         lectureUseCase.cancelLecture(lectureApplicantDto)
     }
+
+    @GetMapping("/popularity/lecture")
+    fun getPopularityLecture(): LectureDto {
+        return lectureUseCase.findPopularityLecture()
+    }
 }

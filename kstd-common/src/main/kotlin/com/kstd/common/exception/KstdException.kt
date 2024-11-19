@@ -1,3 +1,3 @@
 package com.kstd.common.exception
 
-class KstdException(message: String?): RuntimeException(message)
+class KstdException(message: String? = null): RuntimeException(message)

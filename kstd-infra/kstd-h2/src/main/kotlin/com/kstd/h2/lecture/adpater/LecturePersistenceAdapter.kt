@@ -1,14 +1,8 @@
 package com.kstd.h2.lecture.adpater
 
-import com.kstd.domain.lecture.dto.LectureApplicantDto
-import com.kstd.domain.lecture.dto.LectureCondition
-import com.kstd.domain.lecture.dto.LectureDto
-import com.kstd.domain.lecture.dto.LectureFormDto
+import com.kstd.domain.lecture.dto.*
 import com.kstd.domain.lecture.port.output.LecturePersistencePort
-import com.kstd.h2.lecture.converter.toLecture
-import com.kstd.h2.lecture.converter.toLectureApplicant
-import com.kstd.h2.lecture.converter.toLectureApplicantDto
-import com.kstd.h2.lecture.converter.toLectureDto
+import com.kstd.h2.lecture.converter.*
 import com.kstd.h2.lecture.repository.LectureApplicantRepository
 import com.kstd.h2.lecture.repository.LectureRepository
 import org.springframework.stereotype.Component
@@ -66,5 +60,10 @@ class LecturePersistenceAdapter(
         entity?.let {
             lectureApplicantRepository.delete(it)
         }
+    }
+
+    override fun findApplicantCountList(lectureIds: List<Long>): List<LectureApplicantCountDto> {
+        return lectureApplicantRepository.findGroupByLecture(lectureIds)
+            .toLectureApplicantCountDto()
     }
 }

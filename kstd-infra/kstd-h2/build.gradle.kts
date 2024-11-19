@@ -1,7 +1,3 @@
-plugins {
-//    id("com.ewerk.gradle.plugins.querydsl") version "1.0.10"
-}
-
 tasks.getByName("bootJar") {
     enabled = false
 }

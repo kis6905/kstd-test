@@ -1,10 +1,7 @@
 package com.kstd.domain.lecture.service
 
 import com.kstd.common.exception.KstdException
-import com.kstd.domain.lecture.dto.LectureApplicantDto
-import com.kstd.domain.lecture.dto.LectureCondition
-import com.kstd.domain.lecture.dto.LectureDto
-import com.kstd.domain.lecture.dto.LectureFormDto
+import com.kstd.domain.lecture.dto.*
 import com.kstd.domain.lecture.policy.LecturePolicy
 import com.kstd.domain.lecture.port.input.LectureUseCase
 import com.kstd.domain.lecture.port.output.LecturePersistencePort
@@ -41,6 +38,21 @@ internal class LectureService(
 
     override fun saveLecture(form: LectureFormDto): LectureDto {
         return lecturePersistencePort.saveLecture(form)
+    }
+
+    override fun findPopularityLecture(): LectureDto {
+        val applicableLectureList = findApplicableLectureList()
+        if (applicableLectureList.isEmpty()) {
+            throw KstdException("현재 신청중인 강의가 없습니다.")
+        }
+
+        val lectureIds = applicableLectureList.map { it.lectureId }
+        val applicantCountList = lecturePersistencePort.findApplicantCountList(lectureIds)
+        val popularityLecture: LectureApplicantCountDto = applicantCountList.maxByOrNull { it.applicantCount }
+            ?: throw KstdException("현재 모든 강의에 신청자가 없습니다.")
+
+        return applicableLectureList.find { it.lectureId == popularityLecture.lectureId }
+            ?: throw KstdException()
     }
 
     override fun findApplicants(lectureId: Long): List<String> {

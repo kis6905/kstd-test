@@ -1,9 +1,6 @@
 package com.kstd.domain.lecture.port.output
 
-import com.kstd.domain.lecture.dto.LectureApplicantDto
-import com.kstd.domain.lecture.dto.LectureCondition
-import com.kstd.domain.lecture.dto.LectureDto
-import com.kstd.domain.lecture.dto.LectureFormDto
+import com.kstd.domain.lecture.dto.*
 
 interface LecturePersistencePort {
     fun findLectureList(condition: LectureCondition): List<LectureDto>
@@ -15,4 +12,5 @@ interface LecturePersistencePort {
     fun findApplicant(lectureId: Long, memberId: String): LectureApplicantDto?
     fun saveApplicant(lectureApplicantDto: LectureApplicantDto): LectureApplicantDto
     fun removeApplicant(lectureApplicantDto: LectureApplicantDto)
+    fun findApplicantCountList(lectureIds: List<Long>): List<LectureApplicantCountDto>
 }
