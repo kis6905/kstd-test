@@ -31,6 +31,6 @@
 ---
 
 ### API Test (with Postman)
-* Download - link
+* Download - [Link](https://github.com/kis6905/kstd-test/blob/main/docs/kstd-api.postman_collection.json)
 * Postman 에서 Import  
   <img src="./docs/postman_guide.png" width="291px" height="252px" title="Github_Logo"/>
