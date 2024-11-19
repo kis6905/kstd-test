@@ -50,7 +50,7 @@ internal class LectureService(
     override fun findPopularityLecture(): LectureDto {
         val applicableLectureList = findApplicableLectureList()
         if (applicableLectureList.isEmpty()) {
-            throw KstdException("현재 신청중인 강의가 없습니다.")
+            throw KstdException("현재 신청 가능한 강의가 없습니다.")
         }
 
         val lectureIds = applicableLectureList.map { it.lectureId }
@@ -84,7 +84,9 @@ internal class LectureService(
                 throw KstdException("이미 신청한 강의입니다.")
             }
 
-            val lectureDto = lecturePersistencePort.findLecture(lectureApplicantDto.lectureId) ?: return
+            val lectureDto = lecturePersistencePort.findLecture(lectureApplicantDto.lectureId)
+                ?: throw KstdException("강의를 찾을수 없습니다.")
+
             if (lectureDto.applicantLimit <= applicantList.size) {
                 throw KstdException("정원 초과 되었습니다.")
             }
