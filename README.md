@@ -9,11 +9,12 @@
 * 데이터 설계:  
   <img src="./docs/erd.png" width="376px" height="305px" />
 * 그 외:
+  * 멀티 모듈과 헥사고날 아키텍쳐로 구성했습니다.
   * DB Audit Column은 생략했습니다.
   * 강연 신청 시 동시성 이슈를 고려해 Lock을 사용했습니다.  
     Production 이라면 Redis 분산 Lock 을 고려하겠지만, Local 환경이다보니 흉내만 냈습니다.
-  * 멀티 모듈과 헥사고날 아키텍쳐를 사용해봤습니다.
   * 테스트 코드는 유의미한 기능만 작성했습니다.
+    * [LectureServiceTest.kt](https://github.com/kis6905/kstd-test/blob/main/kstd-domain/src/test/kotlin/com/kstd/domain/lecture/service/LectureServiceTest.kt)
 
 ---
 
