@@ -14,7 +14,7 @@
   * 강연 신청 시 동시성 이슈를 고려해 Lock을 사용했습니다.  
     Production 이라면 Redis 분산 Lock 을 고려하겠지만, Local 환경이다보니 흉내만 냈습니다.
   * 테스트 코드는 유의미한 기능만 작성했습니다.
-    * [LectureServiceTest.kt](https://github.com/kis6905/kstd-test/blob/main/kstd-domain/src/test/kotlin/com/kstd/domain/lecture/service/LectureServiceTest.kt){:target="_blank"}
+    * <a href="https://github.com/kis6905/kstd-test/blob/main/kstd-domain/src/test/kotlin/com/kstd/domain/lecture/service/LectureServiceTest.kt" target="_blank">LectureServiceTest.kt</a>
 
 ---
 
@@ -31,6 +31,6 @@
 ---
 
 ### API Test (with Postman)
-* Download - [Link](https://github.com/kis6905/kstd-test/blob/main/docs/kstd-api.postman_collection.json){:target="_blank"}
+* Download - <a href="https://github.com/kis6905/kstd-test/blob/main/docs/kstd-api.postman_collection.json" target="_blank">Link</a>
 * Postman 에서 Import  
   <img src="./docs/postman_guide.png" width="291px" height="252px" title="Github_Logo"/>
