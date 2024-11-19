@@ -4,7 +4,7 @@ import com.kstd.common.condition.OrderType
 import java.time.LocalDateTime
 
 data class LectureCondition(
-    val lectureId: Long? = null,
+    val lectureIds: List<Long>? = null,
     val lectureTimeBefore: LocalDateTime? = null,
     val lectureTimeAfter: LocalDateTime? = null,
     val orderConditions: List<LectureOrderCondition> = listOf(LectureOrderCondition.default)

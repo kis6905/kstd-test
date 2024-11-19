@@ -1,5 +1,6 @@
 package com.kstd.h2.lecture.repository
 
+import com.kstd.common.helper.isNotNullOrNotEmpty
 import com.kstd.domain.lecture.dto.LectureCondition
 import com.kstd.domain.lecture.dto.LectureOrderColumn
 import com.kstd.h2.common.converter.toOrder
@@ -9,7 +10,6 @@ import com.querydsl.core.BooleanBuilder
 import com.querydsl.core.types.OrderSpecifier
 import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.stereotype.Repository
-
 
 @Repository
 class LectureCustomRepositoryImpl(
@@ -26,8 +26,8 @@ class LectureCustomRepositoryImpl(
 
     fun buildWhereClause(lecture: QLecture, condition: LectureCondition): BooleanBuilder {
         val builder = BooleanBuilder()
-        condition.lectureId?.let {
-            builder.and(lecture.lectureId.eq(condition.lectureId))
+        if (condition.lectureIds.isNotNullOrNotEmpty()) {
+            builder.and(lecture.lectureId.`in`(condition.lectureIds))
         }
         condition.lectureTimeAfter?.let {
             builder.and(lecture.lectureDate.gt(condition.lectureTimeAfter))

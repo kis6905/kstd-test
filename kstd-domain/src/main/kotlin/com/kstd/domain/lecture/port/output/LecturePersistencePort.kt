@@ -9,7 +9,10 @@ interface LecturePersistencePort {
     fun findLectureList(condition: LectureCondition): List<LectureDto>
     fun findLecture(lectureId: Long): LectureDto?
     fun saveLecture(form: LectureFormDto): LectureDto
-    fun findApplicants(lectureId: Long): List<LectureApplicantDto>
+
+    fun findApplicantsByLecture(lectureId: Long): List<LectureApplicantDto>
+    fun findApplicantsByMember(memberId: String): List<LectureApplicantDto>
     fun findApplicant(lectureId: Long, memberId: String): LectureApplicantDto?
-    fun saveApplicants(lectureApplicantDto: LectureApplicantDto): LectureApplicantDto
+    fun saveApplicant(lectureApplicantDto: LectureApplicantDto): LectureApplicantDto
+    fun removeApplicant(lectureApplicantDto: LectureApplicantDto)
 }

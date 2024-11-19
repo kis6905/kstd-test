@@ -27,12 +27,24 @@ internal class LectureService(
         return lecturePersistencePort.findLectureList(condition)
     }
 
+    override fun findAppliedLectureList(memberId: String): List<LectureDto> {
+        val applicantList = lecturePersistencePort.findApplicantsByMember(memberId)
+        if (applicantList.isEmpty()) {
+            return emptyList()
+        }
+
+        val condition = LectureCondition(
+            lectureIds = applicantList.map { it.lectureId }
+        )
+        return lecturePersistencePort.findLectureList(condition)
+    }
+
     override fun saveLecture(form: LectureFormDto): LectureDto {
         return lecturePersistencePort.saveLecture(form)
     }
 
     override fun findApplicants(lectureId: Long): List<String> {
-        return lecturePersistencePort.findApplicants(lectureId)
+        return lecturePersistencePort.findApplicantsByLecture(lectureId)
             .map { it.memberId }
     }
 
@@ -42,7 +54,7 @@ internal class LectureService(
         }
 
         // TODO: Lock 필요
-        val applicantList = lecturePersistencePort.findApplicants(lectureApplicantDto.lectureId)
+        val applicantList = lecturePersistencePort.findApplicantsByLecture(lectureApplicantDto.lectureId)
         val isApplied = applicantList.find { it.memberId == lectureApplicantDto.memberId } != null
         if (isApplied) {
             throw KstdException("이미 신청한 강의입니다.")
@@ -53,6 +65,10 @@ internal class LectureService(
             throw KstdException("정원 초과 되었습니다.")
         }
 
-        lecturePersistencePort.saveApplicants(lectureApplicantDto)
+        lecturePersistencePort.saveApplicant(lectureApplicantDto)
+    }
+
+    override fun cancelLecture(lectureApplicantDto: LectureApplicantDto) {
+        lecturePersistencePort.removeApplicant(lectureApplicantDto)
     }
 }
