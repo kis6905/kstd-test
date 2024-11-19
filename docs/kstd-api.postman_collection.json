@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "651b48db-b70b-4cdd-8617-25e3494d24ff",
+		"name": "kstd-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "182977"
+	},
+	"item": [
+		{
+			"name": "admin - 강연 목록",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/admin/lectures",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"lectures"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin - 강연 저장",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"lecturer\": \"페이커\",\r\n    \"applicantLimit\": 10,\r\n    \"lectureDate\": \"2024-11-21T10:00:00\",\r\n    \"lectureContent\": \"강의내용#3\",\r\n    \"lectureHall\": \"lectureHall 3번\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/admin/lecture",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"lecture"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin - 강연 신청자 목록",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/admin/applicants/by/52",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"admin",
+						"applicants",
+						"by",
+						"52"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api - 강연 신청",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"lectureId\": 52,\r\n    \"memberId\": \"10003\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/applicant",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"applicant"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api - 강연 목록",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/lectures",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"lectures"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api - 신청 내역",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/applied/lectures/10001",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"applied",
+						"lectures",
+						"10001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api - 신청한 강연 취소",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"lectureId\": 1,\r\n    \"memberId\": \"10001\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/api/v1/applicant",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"applicant"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "api - 실시간 인기 강연",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/v1/popularity/lecture",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"popularity",
+						"lecture"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
